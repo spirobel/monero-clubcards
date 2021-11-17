@@ -41,41 +41,21 @@ app.use(function(err, req, res, next) {
 main();
 async function main() {
   // connect to daemon
-let daemon = await monerojs.connectToDaemonRpc("http://node.sethforprivacy.com:18089").catch(error => console.log("wallet sync failed, error message: "+ error));
+let daemon = await monerojs.connectToDaemonRpc("http://stagenet.xmr-tw.org:38081").catch(error => console.log("wallet sync failed, error message: "+ error));
 let height = await daemon.getHeight();            // 1523651
 let feeEstimate = await daemon.getFeeEstimate();  // 1014313512
 let txsInPool = await daemon.getTxPool();   
 console.log(height,feeEstimate,txsInPool)
-  let viewOnlyWallet = await monerojs.createWalletFull({
-    networkType: 'mainnet',
-    primaryAddress: "477Q68aPB5yb5kTcjUS7BRSence2f1Fo8aNXFgjFHzPG5jhwpN19W48HvnBFSEPZUxfaoVXCSiptxjbsXm27pL4b7QMQQtA",
-    privateViewKey: "fa12ae79d64af5dd5e8e736925951c5edb54fc12e7902ada414b7b951aed8f08",
+  let wallet = await monerojs.createWalletFull({
+    networkType: 'stagenet',
+    primaryAddress: "55Py9fSwyEeQX1CydtFfPk96uHEFxSxvD9AYBy7dwnYt9cXqKDjix9rS9AWZ5GnH4B1Z7yHr3B2UH2updNw5ZNJEEnv87H1",
+    privateViewKey: "1195868d30373aa9d92c1a21514de97670bcd360c209a409ea3234174892770e",
     password: 'password',
-    restoreHeight: 2473000,
-    serverUri: "http://node.sethforprivacy.com:18089",
+    restoreHeight: 957038,
   });
-  await viewOnlyWallet.sync().catch(error => console.log("wallet sync failed, error message: "+ error))
-  console.log("syncing worked")
+  await wallet.setDaemonConnection("http://stagenet.xmr-tw.org:38081");
+  console.log("wallet connected to daemon")
+  return wallet
 }
-// viewOnlyWalletPromise.then((viewOnlyWallet)=>{
-
-
- // viewOnlyWallet.sync(new class extends monerojs.MoneroWalletListener {
- //   onSyncProgress(height, startHeight, endHeight, percentDone, message) {
- //     // feed a progress bar?
- //     console.log(height, startHeight, endHeight, percentDone, message)
- //   }
- // })
-//  viewOnlyWallet.sync().then(()=>{
-//    return viewOnlyWallet.startSyncing(5000);
-//  }).catch(error => {
-//    console.error('inside wallet.sync promise rejected function called: ' + error.message);
-//  });
-//
-//
-//
-// }).catch(error => {
-//  console.error('outside createwalletpromise rejected function called: ' + error.message);
-//})
 
 module.exports = app;
