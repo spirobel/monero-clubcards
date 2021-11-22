@@ -7,6 +7,7 @@ const monerojs = require("monero-javascript");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var createPaymentUri = require('./routes/create-payment-uri');
 
 var app = express();
 
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/create-payment-uri', createPaymentUri);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -38,14 +40,9 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-main();
-async function main() {
-  // connect to daemon
-let daemon = await monerojs.connectToDaemonRpc("http://stagenet.xmr-tw.org:38081").catch(error => console.log("wallet sync failed, error message: "+ error));
-let height = await daemon.getHeight();            // 1523651
-let feeEstimate = await daemon.getFeeEstimate();  // 1014313512
-let txsInPool = await daemon.getTxPool();   
-console.log(height,feeEstimate,txsInPool)
+app.locals.wallet = monero_wallet();
+
+async function monero_wallet() {
   let wallet = await monerojs.createWalletFull({
     networkType: 'stagenet',
     primaryAddress: "55Py9fSwyEeQX1CydtFfPk96uHEFxSxvD9AYBy7dwnYt9cXqKDjix9rS9AWZ5GnH4B1Z7yHr3B2UH2updNw5ZNJEEnv87H1",
@@ -54,7 +51,6 @@ console.log(height,feeEstimate,txsInPool)
     restoreHeight: 957038,
   });
   await wallet.setDaemonConnection("http://stagenet.xmr-tw.org:38081");
-  console.log("wallet connected to daemon")
   return wallet
 }
 
