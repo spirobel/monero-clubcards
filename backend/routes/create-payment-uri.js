@@ -10,7 +10,7 @@ async function createPaymentUri(wallet){
   let integratedAddress = await wallet.getIntegratedAddress();
 //let address = integratedAddress.getIntegratedAddress();
   //let paymentId = integratedAddress.getPaymentId(); // 16 characters write this to req.app.locals.payment or write it to the session
-  let paymentUri = await wallet.createPaymentUri(new MoneroTxConfig().setAddress(integratedAddress.getIntegratedAddress()).setAmount(new BigInteger("425000000000")))
+  let paymentUri = await wallet.createPaymentUri(new MoneroTxConfig().setAddress(integratedAddress.getIntegratedAddress()).setAmount(new BigInteger("1")))
   return paymentUri;
 }
 /* GET users listing. */
