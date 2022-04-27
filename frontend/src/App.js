@@ -17,6 +17,10 @@ function App() {
         >
           Learn React
         </a>
+          <button onClick={()=>window.postMessage({ type: "FROM_PAGE", text: "Hello from the webpage!" },
+              window.location.origin)}>
+                send message
+          </button>
       </header>
     </div>
   );
