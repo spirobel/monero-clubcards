@@ -21,6 +21,10 @@ function App() {
               window.location.origin)}>
                 send message
           </button>
+          <button onClick={()=>window.postMessage({ type: "BUY_CLUBCARD", url: "http://localhost:3006" },
+              window.location.origin)}>
+                buy clubcard
+          </button>
       </header>
     </div>
   );
