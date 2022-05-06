@@ -1,6 +1,7 @@
-import monero_farmer from './monero_farmer.jpg'
-import monero_farmer2 from './monero_farmer2.png'
-import monero_farmer3 from './monero_farmer3.png'
+
+import monero_farmer from './monero_farmer.png'
+import monerochan from './monerochan.gif'
+import temperance from './temperance.png'
 
 import './App.less';
 import {Card, Avatar, Image} from 'antd'
@@ -23,7 +24,7 @@ function App() {
                 cover={
                     <Image 
                     preview={false}
-                    src={monero_farmer3}
+                    src={monero_farmer}
                     />
                 }
             >
@@ -40,12 +41,12 @@ function App() {
                 cover={
                     <Image 
                     preview={false}
-                    src={monero_farmer}
+                    src={monerochan}
                     />
                 }
             >
                 <Meta
-                    description="Monero Farmers Association"
+                    description="Monerochan's Parlour"
                 />
             </Card>
 
@@ -58,12 +59,12 @@ function App() {
                 cover={
                     <Image 
                     preview={false}
-                    src={monero_farmer2}
+                    src={temperance}
                     />
                 }
             >
                 <Meta
-                    description="Monero Farmers Association"
+                    description="Woman's Monero Temperance Union"
                 />
             </Card>
         </div>
