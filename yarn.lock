@@ -6993,10 +6993,10 @@ mkdirp@~0.5.0:
   dependencies:
     minimist "^1.2.5"
 
-monero-javascript@^0.5.8:
-  version "0.5.8"
-  resolved "https://registry.yarnpkg.com/monero-javascript/-/monero-javascript-0.5.8.tgz#bbba3df39a31b2ba3a4db625d5e5c5105f2d7b73"
-  integrity sha512-WaJDMRwnPtbdtJlSe/t8rOiP7IEnG6+Py8s4+K+GZo8Wo06pHBi5zXpUqrd5N9h565Rs40TtfjvgiJsAxEMJ6A==
+monero-javascript@^0.6.4:
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/monero-javascript/-/monero-javascript-0.6.4.tgz#e141ed7970aae0d58f1b11be5bf49e3d56845606"
+  integrity sha512-svBDjVJozEOQGxqysgSDcn1tggwS3tiEeJgGEOvzhsKasW97S/C+wBhNxGW+0J14bPVbqnhJIB0fFhcpKyn4zw==
   dependencies:
     ajv "^6.12.6"
     async "2.6.1"
