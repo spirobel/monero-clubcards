@@ -16,7 +16,7 @@ function App() {
       <header className="App-header">
         <div  className={classNames("ClubcardGrid")}>
         <Card
-        onClick={()=>window.postMessage({ type: "BUY_CLUBCARD", url: "http://localhost:3006" },
+        onClick={()=>window.postMessage({ type: "BUY_CLUBCARD", url: "http://localhost:9000/monero_farmers_association" },
         window.location.origin)}
                 className={classNames("Clubcard")}
                 hoverable
@@ -33,7 +33,7 @@ function App() {
                 />
             </Card>
         <Card
-        onClick={()=>window.postMessage({ type: "BUY_CLUBCARD", url: "http://localhost:3006" },
+        onClick={()=>window.postMessage({ type: "BUY_CLUBCARD", url: "http://localhost:9000/monerochans_parlour" },
         window.location.origin)}
                 className={classNames("Clubcard")}
                 hoverable
@@ -51,7 +51,7 @@ function App() {
             </Card>
 
             <Card
-        onClick={()=>window.postMessage({ type: "BUY_CLUBCARD", url: "http://localhost:3006" },
+        onClick={()=>window.postMessage({ type: "BUY_CLUBCARD", url: "http://localhost:9000/womans_monero_temperance_union" },
         window.location.origin)}
                 className={classNames("Clubcard")}
                 hoverable
