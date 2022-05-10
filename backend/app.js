@@ -4,10 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const monerojs = require("monero-javascript");
+var session = require('express-session');
+const MongoClient = require('mongodb').MongoClient  
 
+var mfaRouter = require('./routes/monero_farmers_association')
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var createPaymentUri = require('./routes/create-payment-uri');
+
 
 var app = express();
 
@@ -17,13 +19,14 @@ app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({secret: "Shh, its a secret!"}));
 
+ //client.db('monerochan').collection('transactions').insertOne()
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/create-payment-uri', createPaymentUri);
+app.use('/monero_farmers_association', mfaRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -41,6 +44,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 app.locals.wallet = monero_wallet();
+app.locals.db = openDb()
 
 async function monero_wallet() {
   let wallet = await monerojs.createWalletFull({
@@ -52,6 +56,10 @@ async function monero_wallet() {
   });
   await wallet.setDaemonConnection("http://stagenet.xmr-tw.org:38081");
   return wallet
+}
+async function openDb(){
+  const client = await new MongoClient("mongodb://localhost:27017", { useNewUrlParser: true }).connect();
+  return client.db('monerochan')
 }
 
 module.exports = app;

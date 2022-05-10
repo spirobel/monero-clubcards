@@ -11,3 +11,18 @@ export async function createPaymentUri(wallet, standardAddress, amount){
     let paymentUri = await wallet.createPaymentUri(new MoneroTxConfig().setAddress(integratedAddress.getIntegratedAddress()).setAmount(new BigInteger(amount)))
     return paymentUri;
 }
+
+ //client.db('monerochan').collection('transactions').insertOne()
+export async function register(wallet, db, amount, txHash, address, message, signature){
+    wallet = await wallet
+    const check = await wallet.checkTxProof(txHash, address, message, signature) 
+
+    if( check.isGood() && check.getReceivedAmount().compare(new BigInteger(amount)) >= 0){
+        await db('monerochan').collection('registrations').insertOne({
+            txHash, address
+        })
+        return true
+    } else {
+        return false
+    }
+}
