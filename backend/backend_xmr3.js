@@ -26,3 +26,11 @@ export async function register(wallet, db, amount, txHash, address, message, sig
         return false
     }
 }
+
+ export async function login(wallet, db, address, txHash, message, signature){
+    wallet = await wallet
+    const regs = await db('monerochan').collection('registrations').find({txHash, address}).toArray()
+    if(!regs[0].txHash){ return false}
+    const check = await wallet.checkSpendProof(regs[0].txHash, message, signature) 
+    return check
+}
