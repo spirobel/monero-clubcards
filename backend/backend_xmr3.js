@@ -2,7 +2,7 @@ const monerojs = require("monero-javascript");
 const MoneroTxConfig = monerojs.MoneroTxConfig;
 const BigInteger = monerojs.BigInteger;
 const MoneroUtils = monerojs.MoneroUtils;
-export async function createPaymentUri(wallet, standardAddress, amount){
+module.exports.createPaymentUri = async function(wallet, standardAddress, amount){
     wallet = await wallet
     let networkType = wallet.getNetworkType();
     // get integrated address with randomly generated payment id
@@ -13,7 +13,7 @@ export async function createPaymentUri(wallet, standardAddress, amount){
 }
 
  //client.db('monerochan').collection('transactions').insertOne()
-export async function register(wallet, db, amount, txHash, address, message, signature){
+ module.exports.register = async function(wallet, db, amount, txHash, address, message, signature){
     wallet = await wallet
     const check = await wallet.checkTxProof(txHash, address, message, signature) 
 
@@ -27,7 +27,7 @@ export async function register(wallet, db, amount, txHash, address, message, sig
     }
 }
 
- export async function login(wallet, db, address, txHash, message, signature){
+module.exports.login = async function(wallet, db, address, txHash, message, signature){
     wallet = await wallet
     const regs = await db('monerochan').collection('registrations').find({txHash, address}).toArray()
     if(!regs[0].txHash){ return false}

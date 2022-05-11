@@ -1,9 +1,15 @@
 var express = require('express');
 var router = express.Router();
 var crypto = require("crypto");
-import {register, login, createPaymentUri} from '../backend_xmr3'
+var register = require('../backend_xmr3.js').register
+var login = require('../backend_xmr3.js').login
+var createPaymentUri = require('../backend_xmr3.js').createPaymentUri
+
 
 const mfa_address = "72hFPVqkVjY5LQnyRkqkmJHVDKG5kxMmnYAbz9MKtUbuiJoteaJ1LNzMG6jVMt5MXN81qSxoZhFKq98xgjQfrEkZEuHvZJM"
+const mfa_amount = 5;
+const mfa_description = "";
+const mfa_image = "";
 /* GET home page. */
 router.get('/', function(req, res, next) {
   if(req.session.logged_in){
@@ -13,9 +19,10 @@ router.get('/', function(req, res, next) {
     res.render('index', { title: 'Not logged in' });
   }
 });
-/* GET home page. */
-router.get('/buy', function(req, res, next) {
-    res.render('index', { title: 'Express' });
+/* GET buy clucard info. */
+router.get('/buy', async function(req, res, next) {
+     const paymentUri = await createPaymentUri(req.app.locals.wallet, mfa_address,mfa_amount)
+     res.json({"payment_uri":paymentUri, })
   });
   /* GET random string to use as message for get_tx_proof. */
 router.get('/register', function(req, res, next) {
@@ -24,7 +31,7 @@ router.get('/register', function(req, res, next) {
     res.json({register_message});
   });
     /* POST random string to use as message for get_tx_proof. */
-router.post('/register', function(req, res, next) {
+router.post('/register', async function(req, res, next) {
 
   if(!req.session.register_message){
     res.json({success: false});
@@ -33,8 +40,8 @@ router.post('/register', function(req, res, next) {
   const txHash = String(req.body.txHash)
   const signature = String(req.body.signature)
 
-  if(register(req.app.locals.wallet,
-     req.app.locals.db, 5,
+  if(await register(req.app.locals.wallet,
+     req.app.locals.db, mfa_amount,
       txHash, mfa_address,
        req.session.register_message,
         signature))
@@ -56,7 +63,7 @@ router.get('/login', function(req, res, next) {
 
 
       /* POST random string to use as message for get_spend_proof. */
-router.post('/login', function(req, res, next) {
+router.post('/login', async function(req, res, next) {
 
   if(!req.session.login_message){
     res.json({success: false});
@@ -65,7 +72,7 @@ router.post('/login', function(req, res, next) {
   const txHash = String(req.body.txHash)
   const signature = String(req.body.signature)
 
-  if(login(req.app.locals.wallet,
+  if(await login(req.app.locals.wallet,
      req.app.locals.db, 
      mfa_address,
       txHash, 
