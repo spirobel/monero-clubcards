@@ -8,8 +8,8 @@ var createPaymentUri = require('../backend_xmr3.js').createPaymentUri
 
 const mfa_address = "72hFPVqkVjY5LQnyRkqkmJHVDKG5kxMmnYAbz9MKtUbuiJoteaJ1LNzMG6jVMt5MXN81qSxoZhFKq98xgjQfrEkZEuHvZJM"
 const mfa_amount = 5;
-const mfa_description = "";
-const mfa_image = "";
+const mfa_description = "Monero Farmers Association";
+const mfa_image = "http://localhost:9000/images/monero_farmer.png";
 /* GET home page. */
 router.get('/', function(req, res, next) {
   if(req.session.logged_in){
@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
 /* GET buy clucard info. */
 router.get('/buy', async function(req, res, next) {
      const paymentUri = await createPaymentUri(req.app.locals.wallet, mfa_address,mfa_amount)
-     res.json({"payment_uri":paymentUri, })
+     res.json({"payment_uri":paymentUri, "description": mfa_description, "image": mfa_image})
   });
   /* GET random string to use as message for get_tx_proof. */
 router.get('/register', function(req, res, next) {
