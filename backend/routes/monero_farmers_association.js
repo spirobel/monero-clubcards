@@ -60,7 +60,11 @@ router.get('/login', function(req, res, next) {
   res.json({login_message});
   });
 
-
+  router.get('/logged_in', function(req, res, next) {
+    let logged_in = req.session.logged_in ? true : false;
+    
+    res.json({logged_in});
+    });
 
       /* POST random string to use as message for get_spend_proof. */
 router.post('/login', async function(req, res, next) {
