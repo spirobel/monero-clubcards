@@ -7,7 +7,7 @@ var createPaymentUri = require('../backend_xmr3.js').createPaymentUri
 
 
 const mfa_address = "72hFPVqkVjY5LQnyRkqkmJHVDKG5kxMmnYAbz9MKtUbuiJoteaJ1LNzMG6jVMt5MXN81qSxoZhFKq98xgjQfrEkZEuHvZJM"
-const mfa_amount = 5;
+const mfa_amount = 250000000000;
 const mfa_description = "Monero Farmers Association";
 const mfa_image = "http://localhost:9000/images/monero_farmer.png";
 /* GET home page. */
