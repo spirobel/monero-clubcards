@@ -14,7 +14,7 @@
     "express-session": "^1.17.2",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
-    "monero-javascript": "^0.6.4",
+    "monero-javascript": "^0.7.0",
     "mongodb": "^4.5.0",
     "morgan": "~1.9.1",
     "react": "^17.0.2",
