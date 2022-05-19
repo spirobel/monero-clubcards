@@ -8,6 +8,9 @@ var session = require('express-session');
 const MongoClient = require('mongodb').MongoClient  
 
 var mfaRouter = require('./routes/monero_farmers_association')
+var mpRouter = require('./routes/monerochans_parlour')
+var wmtuRouter = require('./routes/womans_monero_temperance_union')
+
 var indexRouter = require('./routes/index');
 
 
@@ -27,6 +30,8 @@ app.use(session({secret: "Shh, its a secret!"}));
  //client.db('monerochan').collection('transactions').insertOne()
 app.use('/', indexRouter);
 app.use('/monero_farmers_association', mfaRouter)
+app.use('/monerochans_parlour', mpRouter)
+app.use('/womans_monero_temperance_union', wmtuRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

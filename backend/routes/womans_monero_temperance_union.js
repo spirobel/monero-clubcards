@@ -8,15 +8,15 @@ var createPaymentUri = require('../backend_xmr3.js').createPaymentUri
 
 const mfa_address = "75jZRMyxRMjbvX38GaAsARaQ1exeBCVkUbPTfGssBfXQ5VPor4eA144YpUE7FNg5bLcpEuehNne23MkG8ZMCkPEeTqtwPsG"
 const mfa_amount = 250000000000;
-const mfa_description = "Monero Farmers Association";
-const mfa_image = "http://localhost:9000/images/monero_farmer.png";
+const mfa_description = "Woman's Monero Temperance Union";
+const mfa_image = "http://localhost:9000/images/temperance.png";
 /* GET home page. */
 router.get('/', function(req, res, next) {
   if(req.session.logged_in){
-    res.render('index', { title: 'Monero Farmers Association - logged in! YEHAAA!' });
+    res.render('index', { title: 'Woman\'s Monero Temperance Union - logged in! YEHAAA!' });
 
   } else {
-    res.render('index', { title: 'Monero Farmers Association - Not logged in' });
+    res.render('index', { title: 'Woman\'s Monero Temperance Union - Not logged in' });
   }
 });
 /* GET buy clucard info. */
