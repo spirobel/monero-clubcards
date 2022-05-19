@@ -11,12 +11,13 @@ module.exports.createPaymentUri = async function(wallet, standardAddress, amount
     await LibraryUtils.loadKeysModule();
     let integratedAddress = await MoneroUtils.getIntegratedAddress(networkType, standardAddress);
     //let paymentId = integratedAddress.getPaymentId(); // 16 characters write this to req.app.locals.payment or write it to the session
-    let paymentUri = await wallet.createPaymentUri(new MoneroTxConfig().setAddress(integratedAddress.getIntegratedAddress()).setAmount(new BigInteger(amount)))
+    let paymentUri = await wallet.createPaymentUri(new MoneroTxConfig().setAddress(standardAddress).setAmount(new BigInteger(amount)))
     return paymentUri;
 }
 
  //client.db('monerochan').collection('transactions').insertOne()
  module.exports.register = async function(wallet, db, amount, txHash, address, message, signature){
+     //TODO check if the txHash is already registered so that people dont register multiple times with the same tx
     wallet = await wallet
     db = await db
     const check = await wallet.checkTxProof(txHash, address, message, signature) 
