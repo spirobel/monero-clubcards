@@ -46,6 +46,7 @@ router.post('/register', async function(req, res, next) {
        req.session.register_message,
         signature))
         { //TODO: set logged_in to true here as well
+          req.session.logged_in = true;
           res.json({success: true});
         }
   else {
