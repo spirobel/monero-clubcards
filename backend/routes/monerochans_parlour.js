@@ -12,7 +12,7 @@ const mfa_description = "Monerochan's Parlour";
 const mfa_image = "http://localhost:9000/images/monerochan.gif";
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  if(req.session.logged_in){
+  if(req.session.mp_logged_in){
     res.render('index', { title: 'Monerochan\'s Parlour - logged in! YEHAAA!' });
 
   } else {
@@ -46,7 +46,7 @@ router.post('/register', async function(req, res, next) {
        req.session.register_message,
         signature))
         { //TODO: set logged_in to true here as well
-          req.session.logged_in = true;
+          req.session.mp_logged_in = true;
           res.json({success: true});
         }
   else {
@@ -62,9 +62,9 @@ router.get('/login', function(req, res, next) {
   });
 
   router.get('/logged_in', function(req, res, next) {
-    let logged_in = req.session.logged_in ? true : false;
+    let mp_logged_in = req.session.mp_logged_in ? true : false;
     
-    res.json({logged_in});
+    res.json({logged_in: mp_logged_in});
     });
 
       /* POST random string to use as message for get_spend_proof. */
@@ -84,7 +84,7 @@ router.post('/login', async function(req, res, next) {
        req.session.login_message,
         signature))
         {
-          req.session.logged_in = true;
+          req.session.mp_logged_in = true;
           res.json({success: true});
         }
   else {
