@@ -1,7 +1,6 @@
-# Getting Started with Create React App
+# Monero Clubcards backend PoC
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+look at the Monero Wallet PoC [repo](https://github.com/spirobel/monerochan-city-wallet) to see how the wallet interacts with this backend.
 ## Available Scripts
 
 In the project directory, you can run:
