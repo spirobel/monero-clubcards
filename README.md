@@ -1,6 +1,13 @@
 # Monero Clubcards backend PoC
 
 look at the Monero Wallet PoC [repo](https://github.com/spirobel/monerochan-city-wallet) to see how the wallet interacts with this backend.
+
+Monero browser wallet PoC: https://github.com/spirobel/monerochan-city-wallet
+
+Monero clubcards backend demo: https://github.com/spirobel/monero-clubcards
+
+demo video: https://www.youtube.com/watch?v=4DLcsQ45zoE
+
 ## Available Scripts
 
 In the project directory, you can run:
